@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 interface Note {
   _id: string;
@@ -14,11 +14,7 @@ export default function OLPage() {
   const [selectedSubject, setSelectedSubject] = useState<string>('all');
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchData();
-  }, [selectedSubject]);
-
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     setLoading(true);
     try {
       const notesUrl = selectedSubject === 'all' 
@@ -34,7 +30,11 @@ export default function OLPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedSubject]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   const subjects = Array.from(
     new Set(notes.map((n) => n.subject))

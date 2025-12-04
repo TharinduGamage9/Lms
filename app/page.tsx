@@ -11,7 +11,7 @@ export default function Home() {
       "@type": "EducationalOrganization",
       "name": "Free Note Platform",
       "description": "Free study notes, educational materials, and resources for students",
-      "url": process.env.NEXT_PUBLIC_SITE_URL || "https://freenote.lk",
+      "url": typeof window !== 'undefined' ? window.location.origin : "https://freenote.lk",
       "offers": {
         "@type": "Offer",
         "price": "0",

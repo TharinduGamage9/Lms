@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 interface NVQCourse {
   _id: string;
@@ -15,11 +15,7 @@ export default function NVQPage() {
   const [selectedSubject, setSelectedSubject] = useState<string>('all');
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchNVQ();
-  }, [selectedCategory, selectedSubject]);
-
-  const fetchNVQ = async () => {
+  const fetchNVQ = useCallback(async () => {
     setLoading(true);
     try {
       let url = '/api/nvq';
@@ -36,7 +32,11 @@ export default function NVQPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedCategory, selectedSubject]);
+
+  useEffect(() => {
+    fetchNVQ();
+  }, [fetchNVQ]);
 
   const categories = Array.from(new Set(nvqCourses.map((c) => c.category)));
   const subjects = Array.from(new Set(nvqCourses.map((c) => c.subject)));
@@ -158,4 +158,5 @@ export default function NVQPage() {
     </div>
   );
 }
+
 

@@ -4,8 +4,21 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import VisitTracker from '@/components/VisitTracker'
 
+// Get site URL - use Vercel URL if available, otherwise fallback
+const getSiteUrl = () => {
+  if (process.env.NEXT_PUBLIC_SITE_URL) {
+    return process.env.NEXT_PUBLIC_SITE_URL;
+  }
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
+  return 'https://freenote.lk';
+};
+
+const siteUrl = getSiteUrl();
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://freenote.lk'),
+  metadataBase: new URL(siteUrl),
   title: {
     default: 'Free Note Platform - Free Study Notes & Educational Resources',
     template: '%s | Free Note Platform'
@@ -42,7 +55,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://freenote.lk',
+    url: siteUrl,
     siteName: 'Free Note Platform',
     title: 'Free Note Platform - Free Study Notes & Educational Resources',
     description: 'Access free study notes, educational materials, and resources for OL, AL, NVQ, B.Com, Psychology, Languages, BA External, and Grade 5.',
@@ -73,10 +86,10 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: process.env.GOOGLE_SITE_VERIFICATION,
+    google: process.env.GOOGLE_SITE_VERIFICATION || undefined,
   },
   alternates: {
-    canonical: process.env.NEXT_PUBLIC_SITE_URL || 'https://freenote.lk',
+    canonical: siteUrl,
   },
 }
 
@@ -90,7 +103,7 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <meta name="theme-color" content="#4F46E5" />
-        <link rel="canonical" href={process.env.NEXT_PUBLIC_SITE_URL || 'https://freenote.lk'} />
+        <link rel="canonical" href={siteUrl} />
       </head>
       <body className="flex flex-col min-h-screen">
         <Navbar />

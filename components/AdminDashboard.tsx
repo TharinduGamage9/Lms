@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 interface Note {
   _id: string;
@@ -107,7 +107,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
     fetchBAExternal();
     fetchGrade5();
     fetchVisitorStats();
-  }, []);
+  }, [fetchVisitorStats]);
 
   useEffect(() => {
     if (activeTab === 'visitors') {
@@ -121,7 +121,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
 
       return () => clearInterval(interval);
     }
-  }, [statsPeriod, activeTab]);
+  }, [statsPeriod, activeTab, fetchVisitorStats]);
 
   const fetchLiveVisitors = async () => {
     try {
@@ -133,7 +133,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
     }
   };
 
-  const fetchVisitorStats = async () => {
+  const fetchVisitorStats = useCallback(async () => {
     try {
       const response = await fetch(`/api/visitors/stats?period=${statsPeriod}`);
       const data = await response.json();
@@ -141,7 +141,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
     } catch (error) {
       console.error('Error fetching visitor stats:', error);
     }
-  };
+  }, [statsPeriod]);
 
   const fetchGrade5 = async () => {
     try {

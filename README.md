@@ -1,108 +1,126 @@
-# LMS Platform
+# Free Note Platform
 
-A Learning Management System platform built with Next.js, MongoDB, and TypeScript. This platform allows admins to manage notes and drive links for OL (Ordinary Level) and AL (Advanced Level) students.
+A comprehensive Learning Management System platform providing free study notes and educational resources for students.
 
 ## Features
 
-- **Student Portal**: Browse notes and drive links by level (OL/AL) and subject
-- **Admin Dashboard**: Manage notes and drive links with full CRUD operations
-- **Authentication**: Secure admin login system
-- **Filtering**: Filter content by subject
-- **Responsive Design**: Modern UI with Tailwind CSS
+- 📚 **OL & AL Notes** - Ordinary Level and Advanced Level study materials
+- 🎓 **NVQ Courses** - Vocational training courses and materials
+- 🧠 **Psychology Notes** - Psychology and therapy study resources
+- 💼 **B.Com Notes** - Bachelor of Commerce degree materials
+- 🌍 **Language Learning** - Resources for 23+ languages
+- 📖 **BA External** - BA External Degree notes
+- 📝 **Grade 5** - Primary education materials
+- 🔍 **SEO Optimized** - Fully optimized for search engines
+- 📱 **Mobile Responsive** - Works perfectly on all devices
 
 ## Tech Stack
 
-- **Frontend**: Next.js 14, React, TypeScript, Tailwind CSS
-- **Backend**: Next.js API Routes
-- **Database**: MongoDB with Mongoose
-- **Authentication**: bcryptjs for password hashing
+- **Framework**: Next.js 14
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Database**: MongoDB
+- **Deployment**: Vercel
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js 18+ installed
-- MongoDB database (local or Atlas)
+- Node.js 18+ 
+- MongoDB database
+- npm or yarn
 
 ### Installation
 
-1. Install dependencies:
+1. Clone the repository
+```bash
+git clone <your-repo-url>
+cd Lms
+```
+
+2. Install dependencies
 ```bash
 npm install
 ```
 
-2. Set up environment variables:
-   - Copy `.env.local.example` to `.env.local`
-   - Add your MongoDB connection string:
-   ```
-   MONGODB_URI=mongodb://localhost:27017/lms
-   ```
-   Or for MongoDB Atlas:
-   ```
-   MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/lms
-   ```
+3. Set up environment variables
+Create a `.env.local` file:
+```env
+MONGODB_URI=your_mongodb_connection_string
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+GOOGLE_SITE_VERIFICATION=your_google_verification_code (optional)
+```
 
-3. Run the development server:
+4. Create admin account
+```bash
+npm run create-admin
+```
+
+5. Run development server
 ```bash
 npm run dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Creating an Admin Account
+## Deployment to Vercel
 
-To create an admin account, you'll need to use MongoDB directly or create a script. Here's a sample script you can run:
+1. **Push to GitHub**
+   ```bash
+   git add .
+   git commit -m "Ready for deployment"
+   git push origin main
+   ```
 
-```javascript
-// scripts/createAdmin.js
-const mongoose = require('mongoose');
-const Admin = require('../models/Admin');
+2. **Connect to Vercel**
+   - Go to [vercel.com](https://vercel.com)
+   - Import your GitHub repository
+   - Vercel will auto-detect Next.js
 
-mongoose.connect(process.env.MONGODB_URI)
-  .then(async () => {
-    const admin = new Admin({
-      username: 'admin',
-      email: 'admin@example.com',
-      password: 'admin123'
-    });
-    await admin.save();
-    console.log('Admin created successfully');
-    process.exit();
-  });
-```
+3. **Set Environment Variables**
+   In Vercel dashboard → Settings → Environment Variables:
+   - `MONGODB_URI` - Your MongoDB connection string
+   - `NEXT_PUBLIC_SITE_URL` - Your site URL (e.g., `https://your-app.vercel.app`)
+   - `GOOGLE_SITE_VERIFICATION` - (Optional) Google Search Console code
 
-## Project Structure
+4. **Deploy**
+   - Click "Deploy"
+   - Wait for build to complete
 
-```
-├── app/
-│   ├── api/              # API routes
-│   ├── admin/            # Admin dashboard
-│   ├── ol/               # OL level page
-│   ├── al/               # AL level page
-│   └── page.tsx          # Home page
-├── components/           # React components
-├── lib/                  # Utility functions
-├── models/               # MongoDB models
-└── public/               # Static assets
-```
+## Environment Variables
 
-## Usage
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `MONGODB_URI` | Yes | MongoDB connection string |
+| `NEXT_PUBLIC_SITE_URL` | Yes | Your website URL |
+| `GOOGLE_SITE_VERIFICATION` | No | Google Search Console verification |
 
-### Admin Dashboard
+## Scripts
 
-1. Navigate to `/admin`
-2. Login with your admin credentials
-3. Add, edit, or delete notes and drive links
-4. Filter by level (OL/AL) and subject
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run create-admin` - Create admin account
+- `npm run add-subjects` - Add OL/AL subjects
+- `npm run add-other-notes` - Add other notes
+- `npm run add-nvq` - Add NVQ courses
+- `npm run add-psychology` - Add psychology notes
+- `npm run add-bcom` - Add B.Com notes
+- `npm run add-languages` - Add language resources
+- `npm run add-ba-external` - Add BA External notes
+- `npm run add-grade5` - Add Grade 5 notes
 
-### Student Portal
+## SEO Features
 
-1. Visit the home page
-2. Select OL or AL level
-3. Browse notes and drive links
-4. Filter by subject if needed
+- ✅ Meta tags and Open Graph tags
+- ✅ Structured data (JSON-LD)
+- ✅ Sitemap.xml
+- ✅ Robots.txt
+- ✅ Mobile responsive design
+- ✅ Semantic HTML
 
 ## License
 
-MIT
+© 2025 Free Note. All Rights Reserved.
 
+Created by Creators

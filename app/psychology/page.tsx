@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 interface PsychologyCourse {
   _id: string;
@@ -13,11 +13,7 @@ export default function PsychologyPage() {
   const [selectedSubject, setSelectedSubject] = useState<string>('all');
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchPsychology();
-  }, [selectedSubject]);
-
-  const fetchPsychology = async () => {
+  const fetchPsychology = useCallback(async () => {
     setLoading(true);
     try {
       const url = selectedSubject === 'all'
@@ -32,7 +28,11 @@ export default function PsychologyPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedSubject]);
+
+  useEffect(() => {
+    fetchPsychology();
+  }, [fetchPsychology]);
 
   const subjects = Array.from(
     new Set(psychologyCourses.map((c) => c.subject))
@@ -97,4 +97,5 @@ export default function PsychologyPage() {
     </div>
   );
 }
+
 

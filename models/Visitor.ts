@@ -49,3 +49,4 @@ VisitorSchema.index({ ip: 1, timestamp: -1 });
 
 export default mongoose.models.Visitor || mongoose.model<IVisitor>('Visitor', VisitorSchema);
 
+

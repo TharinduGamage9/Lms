@@ -18,3 +18,4 @@ export default function BAExternalLayout({
   return <>{children}</>
 }
 
+
